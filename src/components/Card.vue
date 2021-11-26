@@ -5,7 +5,7 @@
           <img :src="card.poster" :alt="card.title">
       </div>
       <h4>{{card.title.toUpperCase()}}</h4>
-      <span>{{card.author}}</span>
+      <span class="autore">{{card.author}}</span>
       <span class="year">{{card.year}}</span>
   </div>
 </template>
@@ -36,16 +36,19 @@ export default {
     flex-direction: column;
     text-align: center;
     .copertina{
-        margin: 15px 0px 10px 0px;
+        margin: 5px 5px 10px 5px;
         width: 90%;
     }
     h4{
         margin-bottom: 15px;
         color: #fff;
     }
+    .autore{
+        font-size: 13px;
+    }
     .year{
-        margin-top: 2px;
-        font-size: 11px;
+       
+        font-size: 10px;
     }
 }
 

@@ -26,4 +26,8 @@ export default {
 @import './assets/style/utilities.scss';
 @import './assets/style/mixins.scss';
 
+body{
+  font-family: 'Montserrat', sans-serif;
+}
+
 </style>

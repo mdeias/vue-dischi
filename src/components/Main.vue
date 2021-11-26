@@ -1,11 +1,16 @@
 <template>
   <main>
-      <div class="contenitore">
+      <div v-if="loaded" class="contenitore">
           <Card
           v-for="card in carte"
           :key="card.id"
           :card="card"
           />
+      </div>
+      <div v-else
+      class="caricamento">
+      <div class="lds-ripple"><div></div><div></div></div>
+      <h1>LOADING</h1>
       </div>
   </main>
 </template>
@@ -23,7 +28,8 @@ export default {
     data(){
 
         return{
-            carte: [],    
+            carte: [],
+            loaded: false   
         }
 
     },
@@ -35,6 +41,7 @@ export default {
                     
                     this.carte = r.data.response;
                     console.log(this.carte);
+                    this.loaded = true;
                 })
                 .catch(e => {
                     console.log(e);
@@ -54,11 +61,54 @@ export default {
 @import '../assets/style/mixins.scss';
 
 main{
+    position: relative;
     background-color: #1E2C3B;
+    height: calc(100vh - 51px);
     padding: 72px;
     .contenitore{
         @include center (between);
         flex-wrap: wrap;
+    }
+    .caricamento{
+        @include center();
+        flex-direction: column;
+        color: white;
+        position: absolute;
+        top: 30%;
+        left: 43%;
+        .lds-ripple {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        .lds-ripple div {
+            position: absolute;
+            border: 4px solid #fff;
+            opacity: 1;
+            border-radius: 50%;
+            animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+        }
+        .lds-ripple div:nth-child(2) {
+            animation-delay: -0.5s;
+        }
+        @keyframes lds-ripple {
+            0% {
+                top: 36px;
+                left: 36px;
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                top: 0px;
+                left: 0px;
+                width: 72px;
+                height: 72px;
+                opacity: 0;
+            }
+        }
+
     }
 }
 
