@@ -4,6 +4,7 @@
           <Card
           v-for="card in carte"
           :key="card.id"
+          :card="card"
           />
       </div>
   </main>
