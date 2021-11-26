@@ -21,6 +21,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~@fontsource/montserrat/index.css';
 @import './assets/style/generali.scss';
 @import './assets/style/utilities.scss';
 @import './assets/style/mixins.scss';
