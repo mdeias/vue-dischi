@@ -1,12 +1,18 @@
 <template>
   <main>
-      <h1>main</h1>
+      <div class="contenitore">
+          <Card/>
+      </div>
   </main>
 </template>
 
 <script>
+import Card from './Card';
 export default {
-    name: 'Main'
+    name: 'Main',
+    components:{
+        Card
+    }
 }
 </script>
 
