@@ -1,17 +1,48 @@
 <template>
   <main>
       <div class="contenitore">
-          <Card/>
+          <Card
+          v-for="card in carte"
+          :key="card.id"
+          />
       </div>
   </main>
 </template>
 
 <script>
+import axios from 'axios';
 import Card from './Card';
+
 export default {
     name: 'Main',
     components:{
         Card
+    },
+
+    data(){
+
+        return{
+            carte: [],    
+        }
+
+    },
+
+    methods:{
+        getApi(){
+            axios.get('https://flynn.boolean.careers/exercises/api/array/music')
+                .then(r => {
+                    
+                    this.carte = r.data.response;
+                    console.log(this.carte);
+                })
+                .catch(e => {
+                    console.log(e);
+                })
+        }
+    },
+
+    mounted(){
+        this.getApi();
     }
 }
 </script>
@@ -23,7 +54,11 @@ export default {
 
 main{
     background-color: #1E2C3B;
-    height: calc(100vh - 50px);
+    padding: 72px;
+    .contenitore{
+        @include center (between);
+        flex-wrap: wrap;
+    }
 }
 
 </style>

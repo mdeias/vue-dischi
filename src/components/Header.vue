@@ -17,9 +17,9 @@ export default {
 
 header{
     @include center(sinistra);
-    height: 50px;
+    height: 51px;
     background-color: #2D3C47;
-    padding-left: 10px;
+    padding-left: 20px;
     img{
         width: 35px;
     }
