@@ -1,22 +1,12 @@
 <template>
-  <div>
-    <Header/>
-    <Main/>
-  </div>
+  <header>
+      <h1>HEADER</h1>
+  </header>
 </template>
 
 <script>
-import Header from './components/Header';
-import Main from './components/Main';
-
-
 export default {
-  name: 'App',
-
-  components: {
-    Header,
-    Main
-  }
+    name: 'Header'
 }
 </script>
 
