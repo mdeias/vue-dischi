@@ -1,6 +1,6 @@
 <template>
   <main>
-      <h1>MAIN</h1>
+      <h1>main</h1>
   </main>
 </template>
 
@@ -11,8 +11,13 @@ export default {
 </script>
 
 <style lang="scss">
-@import './assets/style/generali.scss';
-@import './assets/style/utilities.scss';
-@import './assets/style/mixins.scss';
+@import '../assets/style/generali.scss';
+@import '../assets/style/utilities.scss';
+@import '../assets/style/mixins.scss';
+
+main{
+    background-color: #1E2C3B;
+    height: calc(100vh - 50px);
+}
 
 </style>
