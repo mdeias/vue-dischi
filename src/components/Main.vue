@@ -3,7 +3,7 @@
       <SearchBar @inviaRicerca="eseguiRicerca"/>
       <div v-if="loaded" class="contenitore">
           <Card
-          v-for="card in carte"
+          v-for="card in filtraCarte"
           :key="card.id"
           :card="card"
           />
@@ -40,13 +40,21 @@ export default {
 
     computed:{
         filtraCarte(){
-            if(testoUtente === ''){
+            if(this.testoUtente === ''){
                 return this.carte;
             }
+             const carteFiltrate = this.carte.filter(item => {
+                 return item.genre.toUpperCase().includes(this.testoUtente.toUpperCase())
+             });
+             return carteFiltrate;
         }
     },
 
     methods:{
+        eseguiRicerca(text){
+            this.testoUtente = text;
+        },
+
         getApi(){
             axios.get('https://flynn.boolean.careers/exercises/api/array/music')
                 .then(r => {
