@@ -1,5 +1,6 @@
 <template>
   <main>
+      <SearchBar @inviaRicerca="eseguiRicerca"/>
       <div v-if="loaded" class="contenitore">
           <Card
           v-for="card in carte"
@@ -18,20 +19,31 @@
 <script>
 import axios from 'axios';
 import Card from './Card';
+import SearchBar from './SearchBar';
 
 export default {
     name: 'Main',
     components:{
-        Card
+        Card,
+        SearchBar
     },
 
     data(){
 
         return{
             carte: [],
-            loaded: false   
+            loaded: false,
+            testoUtente: ''  
         }
 
+    },
+
+    computed:{
+        filtraCarte(){
+            if(testoUtente === ''){
+                return this.carte;
+            }
+        }
     },
 
     methods:{
