@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Header/>
-    <Main/>
+    <Header @changeGenre="selectionGenre" :genresList="genres" />
+    <Main :genreToSearch="genreSelected" @genresListed="genresToPops" />
   </div>
 </template>
 
@@ -16,8 +16,27 @@ export default {
   components: {
     Header,
     Main
+  },
+
+  data(){
+    return{
+      genreSelected:'',
+      genres: []
+    };
+  },
+
+  methods:{
+
+    selectionGenre(genre){
+      this.genreSelected = genre;
+    },
+
+    genresToPops(arrGenres){
+      console.log(arrGenres);
+      this.genres = arrGenres;
+    }
   }
-}
+}  
 </script>
 
 <style lang="scss">

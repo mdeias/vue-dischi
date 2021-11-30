@@ -1,10 +1,10 @@
 <template>
   <main>
-      <SearchBar @inviaRicerca="eseguiRicerca"/>
+      
       <div v-if="loaded" class="contenitore">
           <Card
-          v-for="card in filtraCarte"
-          :key="card.id"
+          v-for="(card, index) in filteredCard"
+          :key="index"
           :card="card"
           />
       </div>
@@ -19,13 +19,12 @@
 <script>
 import axios from 'axios';
 import Card from './Card';
-import SearchBar from './SearchBar';
+
 
 export default {
     name: 'Main',
     components:{
         Card,
-        SearchBar
     },
 
     data(){
@@ -33,27 +32,36 @@ export default {
         return{
             carte: [],
             loaded: false,
-            testoUtente: ''  
+            genres: []
         }
 
     },
 
-    computed:{
-        filtraCarte(){
-            if(this.testoUtente === ''){
+    props: {
+        genreToSearch: String
+    },
+
+    computed: {
+        filteredCard(){
+            
+            if(this.genreToSearch === ''){
                 return this.carte;
             }
-             const carteFiltrate = this.carte.filter(item => {
-                 return item.genre.toUpperCase().includes(this.testoUtente.toUpperCase())
-             });
-             return carteFiltrate;
+            
+            const cardFiltered= [];
+            this.carte.forEach( card => {
+                if(card.genre === this.genreToSearch){
+                    cardFiltered.push(card)
+                }
+            })
+
+            return cardFiltered;
         }
     },
+    
 
     methods:{
-        eseguiRicerca(text){
-            this.testoUtente = text;
-        },
+        
 
         getApi(){
             axios.get('https://flynn.boolean.careers/exercises/api/array/music')
@@ -62,6 +70,15 @@ export default {
                     this.carte = r.data.response;
                     console.log(this.carte);
                     this.loaded = true;
+
+                    this.carte.forEach(card => {
+                   
+                        if(!this.genres.includes(card.genre)){
+                        this.genres.push(card.genre)
+                        }
+                    })
+
+                     this.$emit('genresListed',this.genres)
                 })
                 .catch(e => {
                     console.log(e);
@@ -83,7 +100,7 @@ export default {
 main{
     position: relative;
     background-color: #1E2C3B;
-    height: calc(100vh - 51px);
+    
     padding: 72px;
     .contenitore{
         @include center (between);
