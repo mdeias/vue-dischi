@@ -28,7 +28,7 @@ export default {
 .cover-card{
     height: 270px;
     width: 17%;
-    margin: 20px 5px 20px 5px;
+    margin: 20px 10px 20px 15px;
     padding: 10px;
     color: #7D776E;
     background-color: #2D3C47;

@@ -2,14 +2,14 @@
   <header>
       <img src="../assets/img/logo-spotify.png" alt="">
       <select 
-      v-model="genre"
-      @change="$emit('changeGenre',genre)">
-      <option value="" selected>Seleziona un genere</option>
-      <option value="genre"
-        v-for="(genre, index) in genresList"
-        :key="index">
-        {{genre}}
-      </option>
+      v-model="genere"
+      @change="cambiaGenere"
+      >
+          <option value="" selected>Seleziona genere</option>
+          <option value="Rock">Rock</option>
+          <option value="Pop">Pop</option>
+          <option value="Metal">Metal</option>
+          <option value="Jazz">Jazz</option>
       </select>
   </header>
 </template>
@@ -17,19 +17,19 @@
 <script>
 export default {
     name: 'Header',
-    props:{
-        genresList: Array
-    },
     data(){
         return{
-            genre:''
+            genere:'',
         }
     },
-
-     methods: {}
+    methods:{
+        cambiaGenere(){
+           
+            console.log('Header.vue sta facendo partire un evento', this.genere);
+            this.$emit('newSelect', this.genere);
+        }
+    }
 }
-   
-
 </script>
 
 <style lang="scss">

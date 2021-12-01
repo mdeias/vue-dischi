@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Header @changeGenre="selectionGenre" :genresList="genres" />
-    <Main :genreToSearch="genreSelected" @genresListed="genresToPops" />
+    <Header @newSelect="scegliGenere" />
+    <Main @listaGeneri="elencoGeneri" :genereDaCercare="genereSelezionato"/>
   </div>
 </template>
 
@@ -20,23 +20,22 @@ export default {
 
   data(){
     return{
-      genreSelected:'',
-      genres: []
-    };
-  },
-
-  methods:{
-
-    selectionGenre(genre){
-      this.genreSelected = genre;
-    },
-
-    genresToPops(arrGenres){
-      console.log(arrGenres);
-      this.genres = arrGenres;
+      genereSelezionato: '',
+      generi: []
     }
+  },
+  
+  methods:{
+    scegliGenere(genere){
+      this.genereSelezionato = genere;
+      console.log('App.vue ha ricevuto qualcosa da un evento (newSelect)', this.genereSelezionato);
+    },
+    elencoGeneri(generi){
+      console.log(generi);
+      this.genres = generi;
+        }
   }
-}  
+}
 </script>
 
 <style lang="scss">

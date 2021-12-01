@@ -3,8 +3,8 @@
       
       <div v-if="loaded" class="contenitore">
           <Card
-          v-for="(card, index) in filteredCard"
-          :key="index"
+          v-for="card in filtraCarte"
+          :key="card.id"
           :card="card"
           />
       </div>
@@ -27,38 +27,35 @@ export default {
         Card,
     },
 
+    props:{
+        genereDaCercare: String,
+    },
+
     data(){
 
         return{
             carte: [],
             loaded: false,
-            genres: []
+            
         }
 
     },
 
-    props: {
-        genreToSearch: String
-    },
-
-    computed: {
-        filteredCard(){
-            
-            if(this.genreToSearch === ''){
+    computed:{
+        filtraCarte(){
+            if(this.genereDaCercare === ''){
                 return this.carte;
             }
-            
-            const cardFiltered= [];
-            this.carte.forEach( card => {
-                if(card.genre === this.genreToSearch){
-                    cardFiltered.push(card)
+            const carteFiltrate = [];
+            this.carte.forEach(card => {
+                if(card.genre === this.genereDaCercare){
+                    carteFiltrate.push(card);
                 }
-            })
-
-            return cardFiltered;
+            });
+                console.log(carteFiltrate);
+            return carteFiltrate;
         }
     },
-    
 
     methods:{
         
@@ -70,15 +67,6 @@ export default {
                     this.carte = r.data.response;
                     console.log(this.carte);
                     this.loaded = true;
-
-                    this.carte.forEach(card => {
-                   
-                        if(!this.genres.includes(card.genre)){
-                        this.genres.push(card.genre)
-                        }
-                    })
-
-                     this.$emit('genresListed',this.genres)
                 })
                 .catch(e => {
                     console.log(e);
@@ -100,10 +88,9 @@ export default {
 main{
     position: relative;
     background-color: #1E2C3B;
-    
     padding: 72px;
     .contenitore{
-        @include center (between);
+        @include center (sinistra);
         flex-wrap: wrap;
     }
     .caricamento{
